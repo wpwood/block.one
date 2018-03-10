@@ -1,5 +1,6 @@
 import React from 'react';
 
+import Eos from 'eosjs';
 import BlockDisplay from './BlockDisplay';
 import LoadBlockButton from './LoadBlockButton';
 
@@ -21,13 +22,31 @@ class BlockContainer extends React.Component {
       }
     });
 
-    setTimeout(() => { this.blockLoaded(); }, 3000);
+    const eos = Eos.Testnet({httpEndpoint: 'http://t1readonly.eos.io'});
+    eos.getInfo({})
+      .then(result => eos.getBlock(result.head_block_num))
+      .then(result => {
+        this.blockLoaded(result);
+      })
+      .catch((error) => {
+        this.blockErrored(error);
+      });
   }
 
-  blockLoaded() {
+  blockLoaded(block) {
     this.setState({
       block: {
-        status: 'loaded'
+        status: 'loaded',
+        block
+      }
+    });
+  }
+
+  blockErrored(error) {
+    this.setState({
+      block: {
+        status: 'errored',
+        error
       }
     });
   }
