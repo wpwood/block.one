@@ -21,7 +21,7 @@ const dummy_block_info = {
   id:"003d620cdfb58c7cc7d801ea95f04cd0b737b0105a06fe4b377e168fcbbc1cd6",
   block_num:42,
   ref_block_prefix:3925989575
-}
+};
 
 describe('BlockContainer', () => {
   let eos, container;
