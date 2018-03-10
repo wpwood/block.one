@@ -2,10 +2,11 @@ import React from 'react';
 
 import BlockInfo from './BlockInfo';
 import BlockLoading from './BlockLoading';
+import BlockPrompt from './BlockPrompt';
 
 const BlockDisplay = ({block}) => {
   if (block.status === 'uninitialized') {
-    return (<h2>Press the button to load the block</h2>);
+    return (<BlockPrompt />);
   }
 
   if (block.status === 'loading') {

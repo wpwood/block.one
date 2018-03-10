@@ -3,6 +3,7 @@ import BlockDisplay from '../BlockDisplay';
 
 import BlockInfo from '../BlockInfo';
 import BlockLoading from '../BlockLoading';
+import BlockPrompt from '../BlockPrompt';
 
 import { shallow } from 'enzyme';
 
@@ -18,12 +19,8 @@ describe('BlockDisplay', () => {
       display = shallow(<BlockDisplay { ...{block} }/>);
     });
 
-    it('renders an h2 header', () => {
-      expect(display.type()).toEqual('h2');
-    });
-
-    it('shows the prompt text', () => {
-      expect(display.text()).toEqual('Press the button to load the block');
+    it('renders a BlockPrompt component', () => {
+      expect(display.type()).toEqual(BlockPrompt);
     });
   });
 
