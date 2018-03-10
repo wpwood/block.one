@@ -1,6 +1,7 @@
 import React from 'react';
 import BlockDisplay from '../BlockDisplay';
 
+import BlockError from '../BlockError';
 import BlockInfo from '../BlockInfo';
 import BlockLoading from '../BlockLoading';
 import BlockPrompt from '../BlockPrompt';
@@ -38,10 +39,29 @@ describe('BlockDisplay', () => {
     });
   });
 
+  describe('when the block status is errored', () => {
+    const block = {
+      status: 'errored',
+      error: 'Unable to fetch'
+    };
+
+    beforeEach(() => {
+      display = shallow(<BlockDisplay { ...{block} }/>);
+    });
+
+    it('renders a BlockError component', () => {
+      expect(display.type()).toEqual(BlockError);
+    });
+
+    it('passes the block to the BlockError component', () => {
+      expect(display.find(BlockError).at(0).prop('block')).toEqual(block);
+    });
+  });
+
   describe('after the block has loaded', () => {
     const block = {
       status: 'loaded',
-      info: {}
+      block: {}
     };
 
     beforeEach(() => {
