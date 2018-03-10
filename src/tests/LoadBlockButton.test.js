@@ -19,6 +19,6 @@ describe('LoadBlockButton', () => {
   it('triggers the onClick property when clicked', () => {
     button.prop('onClick')();
 
-    expect(onClick.mock.calls.length).toBe(1);
+    expect(onClick).toHaveBeenCalled();
   });
 });
