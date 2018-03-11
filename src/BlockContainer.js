@@ -16,11 +16,7 @@ class BlockContainer extends React.Component {
   }
 
   loadBlock() {
-    this.setState({
-      block: {
-        status: 'loading'
-      }
-    });
+    this.blockLoading();
 
     const eos = Eos.Testnet({httpEndpoint: 'http://t1readonly.eos.io'});
     eos.getInfo({})
@@ -31,6 +27,14 @@ class BlockContainer extends React.Component {
       .catch((error) => {
         this.blockErrored(error);
       });
+  }
+
+  blockLoading() {
+    this.setState({
+      block: {
+        status: 'loading'
+      }
+    });
   }
 
   blockLoaded(block) {
